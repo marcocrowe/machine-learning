@@ -93,12 +93,15 @@ print("There are ", len(stop_words), "items in stop_words")
 
 # # Removing Stop Words
 
-filtered_sent = []
+def filter_stop_words(word_list: list, stop_words: list) -> list:
+    words_of_interest = []
+    for word in word_list:
+        if word not in stop_words:
+            words_of_interest.append(word)
+    return words_of_interest
 
-# for loop for the tokenize sentences
-for word in text_tokens:
-    if word not in stop_words:
-        filtered_sent.append(word)
+
+words_of_interest = filter_stop_words(text_tokens, stop_words)
 
 # Display the tokenize and filtered sentences
 print("Tokenized Sentences:", text_tokens)
