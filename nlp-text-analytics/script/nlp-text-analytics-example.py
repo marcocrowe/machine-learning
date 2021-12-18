@@ -9,7 +9,7 @@ github.display_jupyter_notebook_header("markcrowe-com", "machine-learning",
                                        "nlp-text-analytics/nlp-text-analytics-example.ipynb")
 
 
-# # Class Work Demonstration
+# # Text Analysis Example
 
 # ### Setup
 
@@ -18,7 +18,8 @@ from nltk.tokenize import word_tokenize
 import nltk
 
 
-# Required to run code blocks in this notebook
+# These commands are required to run once to download text files to support the nltk package.  Without them some of Python code will have exceptions.
+
 nltk.download('averaged_perceptron_tagger')
 nltk.download('names')
 nltk.download('punkt')
@@ -26,12 +27,14 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 
-# # Sentence Tokenization
+# ## Sentence Tokenization Example
+# Taking the text "Hello Mr. Smith, how are you doing today? The weather is great, and city is awesome. 
+# The sky is pinkish-blue. You shouldn't eat cardboard".  The method 'sent_tokenize' will break up the text into it's sentences using punctuation marks such as \[. ? ! \].
 
 text = """Hello Mr. Smith, how are you doing today? The weather is great, and city is awesome. 
 The sky is pinkish-blue. You shouldn't eat cardboard"""
 sentences = sent_tokenize(text)
-print(type(sentences))
+print("sentences type is:", type(sentences))
 print(sentences)
 
 
