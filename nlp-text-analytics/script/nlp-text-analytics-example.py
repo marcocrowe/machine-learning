@@ -13,6 +13,9 @@ github.display_jupyter_notebook_header("markcrowe-com", "machine-learning",
 
 # ### Setup
 
+import matplotlib.pyplot
+from nltk.corpus import stopwords
+from nltk.probability import FreqDist
 from nltk.tokenize import sent_tokenize
 from nltk.tokenize import word_tokenize
 import nltk
@@ -23,76 +26,83 @@ import nltk
 nltk.download('averaged_perceptron_tagger')
 nltk.download('names')
 nltk.download('punkt')
-nltk.download('stopwords')
+nltk.download('stopwords') # required for from nltk.corpus import stopwords
 nltk.download('wordnet')
 
 
-# ## Sentence Tokenization Example
+# ## Tokenization Example
+# 
+# ### Sentence Tokenization
 # Taking the text "Hello Mr. Smith, how are you doing today? The weather is great, and city is awesome. 
-# The sky is pinkish-blue. You shouldn't eat cardboard".  The method 'sent_tokenize' will break up the text into it's sentences using punctuation marks such as \[. ? ! \].
+# The sky is pinkish-blue. You shouldn't eat cardboard".  The functions 'sent_tokenize' will break up the text into it's sentences using punctuation marks such as \[. ? ! \].
 
 text = """Hello Mr. Smith, how are you doing today? The weather is great, and city is awesome. 
 The sky is pinkish-blue. You shouldn't eat cardboard"""
 sentences = sent_tokenize(text)
 print("sentences type is:", type(sentences))
 print(sentences)
+print("There are ", len(sentences), "items in sentences")
 
 
-# Convert 'text' into tokenized form
+# ### Word Tokenization
+# Taking the text "Hello Mr. Smith, how are you doing today? The weather is great, and city is awesome. 
+# The sky is pinkish-blue. You shouldn't eat cardboard".  The function 'word_tokenize' will break up the text into it's word using spaces and other punctuation marks such as \[. ? ! \].
+
 text_tokens = word_tokenize(text)
 
-# Display the tokenize text
+print("text_tokens type is:", type(text_tokens))
 print(text_tokens)
+print("There are ", len(text_tokens), "items in text_tokens")
 
 
 # # Frequency Distribution
-# How many times are a words used.
+# How many times do the words occur?
 
-from nltk.probability import FreqDist
+frequency_distribution = FreqDist(text_tokens)
 
-# Calculate the frequency distribution
-fdist = FreqDist(text_tokens)
-
-# Display the frequency distribution
-print(fdist)
+print(frequency_distribution)
 print(len(text_tokens))
 
 
-# Display the most common words
-MOST_COMMON_COUNT = 5
-fdist.most_common(MOST_COMMON_COUNT)
+# So what does that mean.  There are 25 unique words and all the words are used a total of 30 times.
 
+TOP_COMMON_COUNT = 5
+frequency_distribution.most_common(TOP_COMMON_COUNT)
+
+
+# If we increased 'TOP_COMMON_COUNT' to 6 or 10 every word after ('Hello', 1) would also have a value of 1.
 
 # ### Frequency Distribution Plot
 
-import matplotlib.pyplot
-
-fdist.plot(30, cumulative = False)
+frequency_distribution.plot(30, cumulative = False)
 pyplot.show()
 
 
-from nltk.corpus import stopwords
+# Natural Language Processing with PythonNatural language processing (nlp) is a research field that presents many challenges such as natural language understanding.  
+# 
+# Text may contain stop words like 'the', 'is', 'are'. Stop words can be filtered from the text to be processed. There is no universal list of stop words in nlp research, however the nltk module contains a list of stop words.  
+# 
+# For more information c.f. <https://pythonspot.com/nltk-stop-words/>
 
-# Load the stop words
 stop_words = set(stopwords.words("english"))
 
-# Display the stop words
+print("stop_words type is:", type(text_tokens))
 print(stop_words)
+print("There are ", len(stop_words), "items in stop_words")
 
 
 # # Removing Stop Words
 
-# Initialise an array
 filtered_sent = []
 
 # for loop for the tokenize sentences
-for w in tokenized_sent:
-    if w not in stop_words:
-        filtered_sent.append(w)
+for word in text_tokens:
+    if word not in stop_words:
+        filtered_sent.append(word)
 
 # Display the tokenize and filtered sentences
-print("Tokenized Sentence:", tokenized_sent)
-print("Filterd Sentence:", filtered_sent)
+print("Tokenized Sentences:", text_tokens)
+print("Filterd Sentences:", filtered_sent)
 
 
 # # Steming
