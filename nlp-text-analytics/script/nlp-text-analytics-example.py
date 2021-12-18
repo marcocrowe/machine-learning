@@ -91,7 +91,7 @@ print(stop_words)
 print("There are ", len(stop_words), "items in stop_words")
 
 
-# # Removing Stop Words
+# ## Removing Stop Words
 
 def filter_stop_words(word_list: list, stop_words: list) -> list:
     words_of_interest = []
@@ -105,48 +105,59 @@ words_of_interest = filter_stop_words(text_tokens, stop_words)
 
 # Display the tokenize and filtered sentences
 print("Tokenized Sentences:", text_tokens)
-print("Filterd Sentences:", filtered_sent)
+print("Filterd Sentences:", words_of_interest)
 
 
-# # Steming
+# ## Stemming
+# What is stemming?
+# Stemming is the process of reducing inflection in words to their root forms such as mapping a group of words to the same stem even if the stem itself is not a valid word in the Language.  
+# c.f. <https://www.datacamp.com/community/tutorials/stemming-lemmatization-python>
+
+# #### Using the 'PorterStemmer'
 
 # Stemming
 from nltk.stem import PorterStemmer
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 # Create an initialise an object ps by calling a method PorterStemmer()
-ps = PorterStemmer()
+porter_stemmer = PorterStemmer()
 
 # Initialise an array 'stemmed_words'
 stemmed_words = []
 
 # Store all the words into an array 'stemmed_words'
-for w in filtered_sent:
-    stemmed_words.append(ps.stem(w))
+
+for word in words_of_interest:
+    stemmed_words.append(porter_stemmer.stem(word))
 
 # Display the stemmed_words
-print("Filtered Sentence:",filtered_sent)
-print("Stemmed Sentence:",stemmed_words)
+print("words of interest:", words_of_interest)
+print()
+print("Stemmed words:", stemmed_words)
 
+
+# ### Word Net Lemmatizer
+# what is Lemmatizer?
 
 # Lexicon Normalization
 # Performing stemming and Lemmatization
 
-from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
+from nltk.stem.wordnet import WordNetLemmatizer
 
 # Create an initialise an object 'lem' by calling a method WordNetLemmatizer()
-lem = WordNetLemmatizer()
+lemmatizer = WordNetLemmatizer()
 
 # Create an initialise an object 'stem' by calling a method PorterStemmer()
-stem = PorterStemmer()
+porter_stemmer = PorterStemmer()
 
 # Store the word 'flying' into string 'word'
 word = "flying"
 
 # Display the Lemmatized and stemmed words
-print("Lemmatized Word:", lem.lemmatize(word, "v"))
-print("Stemmed Word:", stem.stem(word))
+print("Word:", word)
+print("Lemmatized Word:", lemmatizer.lemmatize(word, "v"))
+print("Stemmed Word:", porter_stemmer.stem(word))
 
 
 # Store a sentence into an array 'sent'
