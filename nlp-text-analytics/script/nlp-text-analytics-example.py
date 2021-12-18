@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-get_ipython().system('pip install markcrowe')
+# !pip install markcrowe
 
 
 import data_analytics.github as github
 github.display_jupyter_notebook_header("markcrowe-com", "machine-learning", 
-                                       "notebooks/nlp-text-analytics/nlp-text-analytics-example.ipynb")
+                                       "nlp-text-analytics/nlp-text-analytics-example.ipynb")
 
 
 # # Class Work Demonstration
