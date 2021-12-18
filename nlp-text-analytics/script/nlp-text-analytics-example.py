@@ -46,6 +46,7 @@ print(text_tokens)
 
 
 # # Frequency Distribution
+# How many times are a words used.
 
 from nltk.probability import FreqDist
 
